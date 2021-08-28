@@ -1,3 +1,5 @@
+
+// componente para o formulário de edicão de notas/lembretes
 export default function EditForm({
   currentTodo,
   setIsEditing,

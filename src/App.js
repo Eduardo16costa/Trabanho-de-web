@@ -1,18 +1,20 @@
 import { useEffect, useState } from "react";
-import TodoItem from "./TodoItem";
-import AddTodoForm from "./AddTodoForm";
-import EditForm from "./EditForm";
-import "./styles.css";
+import TodoItem from "./TodoItem"; // importa o componente TodoItem
+import AddTodoForm from "./AddTodoForm"; // importa o componente AddTodoForm
+import EditForm from "./EditForm"; // importa o componente EditForm
+import "./styles.css"; // importa a folha de estilos
 
 export default function App() {
   const [todos, setTodos] = useState(() => {
-    const savedTodos = localStorage.getItem("todos");
+    const savedTodos = localStorage.getItem("todos"); // carrega as notas/lembretes apartir do localstorage
     if (savedTodos) {
       return JSON.parse(savedTodos);
     } else {
       return [];
     }
   });
+
+  // define os estados iniciais da aplicação
   const [todo, setTodo] = useState("");
   const [isEditing, setIsEditing] = useState(false);
   const [currentTodo, setCurrentTodo] = useState({});
@@ -30,7 +32,7 @@ export default function App() {
     setCurrentTodo({ ...currentTodo, text: e.target.value });
     console.log(currentTodo);
   }
-  // adicionar nota botão
+  // adicionar nota botão evento
   function handleAddFormSubmit(e) {
     e.preventDefault();
 
@@ -46,7 +48,7 @@ export default function App() {
 
     setTodo("");
   }
-  // funcão que dispara ao clickar em editar
+  // funcão que dispara ao clickar em editar evento
   function handleEditFormSubmit(e) {
     // evita que o navegador recarregue a pagina
     e.preventDefault();
@@ -77,6 +79,8 @@ export default function App() {
 
   return (
     <div className="App">
+      {/* condição para mostrar os formulários */}
+      {/* link para a doc https://pt-br.reactjs.org/docs/conditional-rendering.html */}
       {isEditing ? (
         <EditForm
           currentTodo={currentTodo}
@@ -93,6 +97,9 @@ export default function App() {
       )}
 
       <ul className="todo-list">
+        {/* itera nas lista de notas/lembretes */}
+        {/* map é uma função do ArrayList */}
+        {/* link para a doc https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Array/map */}
         {todos.map((todo) => (
           <TodoItem
             todo={todo}
